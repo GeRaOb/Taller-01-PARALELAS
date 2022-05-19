@@ -1,17 +1,15 @@
 #include "Funciones.h"
 #define NOTAS "pruebas.csv"
-#define MAX 10000
+#define MAX 18000000
 using namespace std;
-
-string Estudiante[MAX][18];
-int length;
-
 void leerdatos() {
     ifstream archivo(NOTAS);
+    ofstream Correccion("Correccion.csv");
     string linea;
     char delimitador = ';';
     int i = 0;
     getline(archivo, linea); //Salto de linea inicial
+    Correccion <<"\""<<"Token Estudiantes"<<"\""<<";"<<"\""<<"Correctas"<<"\""<<";"<<"\""<<"Incorrectas"<<"\""<<";"<<"\""<<"Omitidas"<<"\""<<";"<<"\""<<"Puntaje"<<"\""<<";"<<"\""<<"Nota"<<"\""<<";"<<endl;
     while(getline(archivo, linea) && i<MAX ) { // Entran así -> "Token de estudiante";"Pregunta 1";"Pregunta 2";"[...]"
         stringstream stream(linea);  // Convertir cadena a stream
         string Token,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12; // Variables para los datos del .csv
@@ -48,93 +46,45 @@ void leerdatos() {
         P10.erase(remove(P10.begin(), P10.end(), '\"'), P10.end());
         P11.erase(remove(P11.begin(), P11.end(), '\"'), P11.end());
         P12.erase(remove(P12.begin(), P12.end(), '\"'), P12.end());
-        // Ingresar datos en matriz
-        Estudiante[i][0] = Token;
-        Estudiante[i][1] = P1;
-        Estudiante[i][2] = P2;
-        Estudiante[i][3] = P3;
-        Estudiante[i][4] = P4;
-        Estudiante[i][5] = P5;
-        Estudiante[i][6] = P6;
-        Estudiante[i][7] = P7;
-        Estudiante[i][8] = P8;
-        Estudiante[i][9] = P9;
-        Estudiante[i][10] = P10;
-        Estudiante[i][11] = P11;
-        Estudiante[i][12] = P12;
-        //Correccion
 
-        for(int n = 1; n > 0 && n < 13; n++)
-        {
-            if(Estudiante[i][n-1]==Respuestas[n-1])
+        string Prueba[12]={P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12};
+        for(int Aux = 0; Aux < 12; Aux++) //Correccion de la prueba
             {
-                correctas++;
-                puntaje+=0.50;
-            }
-            else if(Estudiante[i][n]=="-")
-            {
-                omitidas++;
-            }
+            if(Prueba[Aux]==Respuestas[Aux])
+                {
+                    correctas++;
+                    puntaje+=0.50;
+                }
+            else if(Prueba[Aux]=="-")
+                {
+                    omitidas++;
+                }
             else
-            {
-                incorrectas++;
-                puntaje-=0.12;
+                {
+                    incorrectas++;
+                    puntaje-=0.12;
+                }
             }
-        }
-
-        Estudiante[i][13] = to_string(correctas);
-        Estudiante[i][14] = to_string(incorrectas);
-        Estudiante[i][15] = to_string(omitidas);
-        if(puntaje<0)
+        Correccion << "\"" << Token << "\"" << ";"; //Token Estudiante
+        Correccion << "\"" << to_string(correctas) << "\"" << ";"; //Correctas
+        Correccion << "\"" << to_string(incorrectas) << "\"" << ";"; //Incorrectas
+        Correccion << "\"" << to_string(omitidas) << "\"" << ";"; //Omitidas
+        if(puntaje<0) //Corrige si el puntaje da menos que 0
         {
-            puntaje=0;
+            puntaje=1;
         }
-        Estudiante[i][16] = to_string(puntaje);
-        Estudiante[i][17] = to_string(1+puntaje);
+        Correccion << "\"" << to_string(puntaje) << "\"" << ";"; //Puntaje
 
-                        // Imprimir
-        /*cout << endl << "========" << "[" << i << "]" <<"========" << endl;
-        cout << "Token " << Estudiante[i][0] << endl;
-        cout << "P1 " << Estudiante[i][1] << endl;
-        cout << "P2 " << Estudiante[i][2] << endl;
-        cout << "P3 " << Estudiante[i][3] << endl;
-        cout << "P4 " << Estudiante[i][4] << endl;
-        cout << "P5 " << Estudiante[i][5]  << endl;
-        cout << "P6 " << Estudiante[i][6] << endl;
-        cout << "P7 " << Estudiante[i][7] << endl;
-        cout << "P8 " << Estudiante[i][8] << endl;
-        cout << "P9 " << Estudiante[i][9] << endl;
-        cout << "P10 " << Estudiante[i][10] << endl;
-        cout << "P11 " << Estudiante[i][11] << endl;
-        cout << "P12 " << Estudiante[i][12] << endl;
-        cout << "Correctas " << Estudiante[i][13] << endl;
-        cout << "Incorrectas " << Estudiante[i][14] << endl;
-        cout << "Omitidas " << Estudiante[i][15] << endl;
-        cout << "Puntaje " << Estudiante[i][16] << endl;
-        cout << "Nota " << Estudiante[i][17] << endl;*/
-
-        i++;
-    }
-	length = i; // Obtener la cantidad de datos
-    archivo.close();
-}
-void crearCSV() { // Correccion Pruebas
-    ofstream archivo("Correccion.csv");
-    archivo <<"\""<<"Token Estudiantes"<<"\""<<";"<<"\""<<"Correctas"<<"\""<<";"<<"\""<<"Incorrectas"<<"\""<<";"<<"\""<<"Omitidas"<<"\""<<";"<<"\""<<"Puntaje"<<"\""<<";"<<"\""<<"Nota"<<"\""<<";"<<endl;
-    for(int i = 0; i < MAX; i++) {
-        archivo << "\"" << Estudiante[i][0] << "\"" << ";"; //Token Estudiante
-        archivo << "\"" << Estudiante[i][13] << "\"" << ";"; //Correctas
-        archivo << "\"" << Estudiante[i][14] << "\"" << ";"; //Incorrectas
-        archivo << "\"" << Estudiante[i][15] << "\"" << ";"; //Omitidas
-        archivo << "\"" << Estudiante[i][16] << "\"" << ";"; //Puntaje
         if(i < MAX - 1)
             {
-                archivo << "\"" << Estudiante[i][17] << "\"" << endl;
+                Correccion << "\"" << to_string(1+puntaje) << "\"" << endl;
             }
         else
             {
-				archivo << "\"" << Estudiante[i][17] << "\"";
+				Correccion << "\"" << to_string(ceil((puntaje+1) * 10.0) / 10.0) << "\"";
 			}
-    }
+        i++;
+}
     archivo.close();
+    Correccion.close();
 }
