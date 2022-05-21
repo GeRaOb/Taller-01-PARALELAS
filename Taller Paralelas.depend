@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1652997242 source:c:\users\gerao\desktop\nueva carpeta\taller paralelas\main.cpp
+	<iostream>
+	"Funciones.h"
+
+1653001531 c:\users\gerao\desktop\nueva carpeta\taller paralelas\include\funciones.h
+	<iostream>
+	<sstream>
+	<fstream>
+	<string>
+	<cmath>
+	<iomanip>
+	<algorithm>
+
+1653001546 source:c:\users\gerao\desktop\nueva carpeta\taller paralelas\src\funciones.cpp
+	"Funciones.h"
+
+1653163956 source:c:\users\gerao\desktop\paralelas\taller paralelas\main.cpp
+	"Funciones.h"
+
+1653001531 c:\users\gerao\desktop\paralelas\taller paralelas\include\funciones.h
+	<iostream>
+	<sstream>
+	<fstream>
+	<string>
+	<cmath>
+	<iomanip>
+	<algorithm>
+
+1653164544 source:c:\users\gerao\desktop\paralelas\taller paralelas\src\funciones.cpp
+	"Funciones.h"
+
