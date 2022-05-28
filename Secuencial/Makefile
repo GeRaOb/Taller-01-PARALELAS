@@ -1,6 +1,6 @@
 all: Funcion.o main
 $(info *******************************************************)
-$(info Programa creado por: German Ramirez y Mauricio Quiroz)
+$(info Programa Creado por: German Ramirez, Allan Morales y Oscar Muñoz)
 $(info *******************************************************)
 
 Funcion.o: Funcion.h Funcion.cpp pruebas.csv

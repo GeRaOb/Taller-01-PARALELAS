@@ -1,15 +1,17 @@
-#include "Funcion.h"
+#include "Funciones.h"
 using namespace std;
 
 
 /**
 *   TAREA 01 - COMPUTACIÓN PARALELA Y DISTRIBUIDA
+*	Programa Creado por German Ramirez, Allan Morales y Oscar Muñoz
 *
  */
 
 int main()
 {
+	cout << "Programa Creado por German Ramirez, Allan Morales y Oscar Muñoz" << endl;
     leerdatos();
-    cout<<"Programa finalizado, Creado por German Ramirez y Mauricio Quiroz"<<endl;
+    cout<<"Programa finalizado";
     return 0;
 }
