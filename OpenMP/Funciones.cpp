@@ -52,7 +52,7 @@ void leerdatos() {
 
             string Prueba[12]={P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12};
 
-            #pragma omp for
+			#pragma omp for
             
                 for(int Aux = 0; Aux < 12; Aux++) //Correccion de la prueba
                     {
@@ -71,28 +71,17 @@ void leerdatos() {
                             puntaje-=0.12;
                         }
                     }
+                    
+				#pragma omp critical
+				
                 Correccion << "\"" << Token << "\"" << ";"; //Token Estudiante
                 Correccion << "\"" << to_string(correctas) << "\"" << ";"; //Correctas
                 Correccion << "\"" << to_string(incorrectas) << "\"" << ";"; //Incorrectas
                 Correccion << "\"" << to_string(omitidas) << "\"" << ";"; //Omitidas
-                if(puntaje<0) //Corrige si el puntaje da menos que 0
-                {
-                    puntaje=1;
-                }
                 Correccion << "\"" << to_string(puntaje) << "\"" << ";"; //Puntaje
-
-                if(i < MAX - 1)
-                    {
-                        Correccion << "\"";
-                        Correccion << std::setprecision(2) << (puntaje+1);
-                        Correccion << "\"" << endl;
-                    }
-                else
-                    {
-                    	Correccion << "\"";
-                    	Correccion << std::setprecision(2) << (puntaje+1);
-                    	Correccion << "\"";
-                    }
+                Correccion << "\"";
+                Correccion << std::setprecision(2) << (puntaje+1);
+                Correccion << "\"" << endl;
         i++;
         }
     }

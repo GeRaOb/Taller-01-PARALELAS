@@ -2,7 +2,7 @@
 #define NOTAS "pruebas.csv"
 #define MAX 100000000
 using namespace std;
-void leerdatos() {
+void leerdatos() {	
     ifstream archivo(NOTAS);
     ofstream Correccion("Correccion.csv");
     string linea;
@@ -65,28 +65,14 @@ void leerdatos() {
                     puntaje-=0.12;
                 }
             }
-        Correccion << "\"" << Token << "\"" << ";"; //Token Estudiante
-        Correccion << "\"" << to_string(correctas) << "\"" << ";"; //Correctas
-        Correccion << "\"" << to_string(incorrectas) << "\"" << ";"; //Incorrectas
-        Correccion << "\"" << to_string(omitidas) << "\"" << ";"; //Omitidas
-        if(puntaje<0) //Corrige si el puntaje da menos que 0
-        {
-            puntaje=1;
-        }
-        Correccion << "\"" << to_string(puntaje) << "\"" << ";"; //Puntaje
-
-        		if(i < MAX - 1)
-                    {
-                        Correccion << "\"";
-                        Correccion << std::setprecision(2) << (puntaje+1);
-                        Correccion << "\"" << endl;
-                    }
-                else
-                    {
-                    	Correccion << "\"";
-                    	Correccion << std::setprecision(2) << (puntaje+1);
-                    	Correccion << "\"";
-                    }
+                Correccion << "\"" << Token << "\"" << ";"; //Token Estudiante
+                Correccion << "\"" << to_string(correctas) << "\"" << ";"; //Correctas
+                Correccion << "\"" << to_string(incorrectas) << "\"" << ";"; //Incorrectas
+                Correccion << "\"" << to_string(omitidas) << "\"" << ";"; //Omitidas
+                Correccion << "\"" << to_string(puntaje) << "\"" << ";"; //Puntaje
+                Correccion << "\"";
+                Correccion << std::setprecision(2) << (puntaje+1);
+                Correccion << "\"" << endl;
         i++;
         }
     archivo.close();
