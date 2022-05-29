@@ -1,6 +1,6 @@
 #include "Funcion.h"
 #define NOTAS "pruebas.csv"
-#define MAX 100000000
+#define MAX 1000000
 using namespace std;
 void leerdatos() {	
     ifstream archivo(NOTAS);

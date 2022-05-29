@@ -1,4 +1,4 @@
-#include "Funciones.h"
+#include "Funcion.h"
 using namespace std;
 
 
